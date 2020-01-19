@@ -1,7 +1,7 @@
 # BCHacks2020_group1
 BC Hacks 2020 #group1 RUMINO (Arduino Robot) 
 The idea of the robot is to meaure the size of a given space. 
-More info will be on our [Google Slide](https://docs.google.com/presentation/d/1van8G8I-gMQ3r8hm5-hzkR8TM-_lEW5oeC5l1kWMFeE/edit?usp=sharing)
+More info will be on our [Google Slides](https://docs.google.com/presentation/d/1van8G8I-gMQ3r8hm5-hzkR8TM-_lEW5oeC5l1kWMFeE/edit?usp=sharing).
 ## High Level Requirement
 * The robot going to turn when it almsot hit the wall 
 * The robot will collect it's position data
