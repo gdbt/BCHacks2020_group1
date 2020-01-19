@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Robot Controller</string>
+    <string name="grabbed_data"></string>
 </resources>
