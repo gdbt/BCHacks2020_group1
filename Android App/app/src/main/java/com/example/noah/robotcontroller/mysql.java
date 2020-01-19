@@ -12,8 +12,8 @@ import java.sql.PreparedStatement;
 
 public class mysql extends AppCompatActivity {
 String url = "jdbc://mysql:/***.***.***.***/g1RobotDB"; //replace with the IP address used
-String uid = "phone"; //username for the mysql database
-String pwd = "almostdoneguys"; //password for the mysql database
+String uid = "****"; //username for the mysql database
+String pwd = "*****"; //password for the mysql database
 TextView conf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
