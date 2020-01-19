@@ -4,37 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main">
+    tools:context=".collect_Data">
 
     <Button
-        android:id="@+id/viewDevice"
+        android:id="@+id/grabdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="94dp"
-        android:text="List Devices"
+        android:layout_marginTop="85dp"
+        android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/grabbed"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="163dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="79dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewDevice" />
-
-    <ListView
-        android:id="@+id/deviceListing"
-        android:layout_width="368dp"
-        android:layout_height="311dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grabbed" />
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="234dp" />
 </android.support.constraint.ConstraintLayout>
