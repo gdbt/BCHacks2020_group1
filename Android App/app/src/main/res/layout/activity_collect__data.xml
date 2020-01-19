@@ -10,20 +10,20 @@
         android:id="@+id/grabdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="122dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="29dp"
         android:text="Press for data!"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="163dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="101dp"
+        android:layout_marginLeft="192dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grabdata" />
 
@@ -31,9 +31,20 @@
         android:id="@+id/mys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="19dp"
         android:text="Press to Send Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textOut" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="273dp"
+        android:layout_height="153dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
+        android:src="@mipmap/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

@@ -17,25 +17,18 @@ import java.io.InputStream;
 import java.util.UUID;
 
 public class collect_Data extends Activity {
-    String address = null;
+    String address = null; //intialization of variables
     BluetoothAdapter bluetooth = null;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private ProgressDialog progress;
-    Button grabbtn;
+    Button grabbtn; //initalizing objects
     Button mysqlbutton;
     TextView output;
 
-
-
-
     private class ConnectBT extends AsyncTask<Void, Void, Void>{
         private boolean ConnectSuccess = true;
-        @Override
-        protected void onPreExecute(){
-            progress = ProgressDialog.show(collect_Data.this,"Connecting...","Please wait!");
-        }
+
         @Override
         protected Void doInBackground(Void... devices) {//doing progress in background{
             try {
@@ -44,63 +37,59 @@ public class collect_Data extends Activity {
                     BluetoothDevice dispositivo = bluetooth.getRemoteDevice(address);//connects and checks if available
                     btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
-                    btSocket.connect();
+                    btSocket.connect(); //going through the process of connecting to the bluetooth
                 }
-            } catch (IOException e) {
+            } catch (IOException e) { //in the event of an IO exception it will change to false;
                 ConnectSuccess = false;
             }
             return null;
         }
         @Override
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(Void result){ //checking if the connection went through
             super.onPostExecute(result);
             if(!ConnectSuccess){
-                System.out.println("Connection failed");
-                finish();
+                finish(); //finishing process so the program doesn't overwork itself
             }
             else{
-                System.out.println("Connected");
-                isBtConnected = true;
+                isBtConnected = true; //connected and working
             }
-            progress.dismiss();
         }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collect__data);
-        Intent newint = getIntent();
+        Intent newint = getIntent(); //taking the intent from the previous activity
         address = newint.getStringExtra(Main.dev_add);
-        output = (TextView) findViewById(R.id.textOut);
+        output = (TextView) findViewById(R.id.textOut); //setting up some of the objects
         grabbtn = (Button)findViewById(R.id.grabdata);
         mysqlbutton = (Button)findViewById(R.id.mys);
-        new ConnectBT().execute();
+        new ConnectBT().execute(); //calling the ConnectBT() class and running te code
         this.grabbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 grabdata();
             }
-        });
+        }); //this is the button that will jump to grabdata.
         this.mysqlbutton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //this button runs the intent to the mysql page to connect and update the database
                 String robodata="robot data";
                 String stringdata = "throwing";
-                Intent mysqlintent = new Intent(collect_Data.this,mysql.class);
-                mysqlintent.putExtra(robodata, stringdata);
-                startActivity(mysqlintent);
+                Intent mysqlintent = new Intent(collect_Data.this,mysql.class); //defining the intent.
+                mysqlintent.putExtra(robodata, stringdata); //putting the data into the intent
+                startActivity(mysqlintent); //launching the mysql activity
             }
         });
-
     }
-    private void grabdata(){
-        boolean bStop = false;
-        if (btSocket!=null){
+    private void grabdata(){ //main connection point that recieves and converts the data from the arduino
+        boolean bStop = false; //stop clause
+        if (btSocket!=null){ //making sure its connected
             try {
-                btSocket.getOutputStream().write("2".toString().getBytes());
+                btSocket.getOutputStream().write("2".toString().getBytes()); //sending the number 2 to the arduino
                 try{
-                    InputStream input = collect_Data.this.btSocket.getInputStream();
-                    while(!bStop){
+                    InputStream input = collect_Data.this.btSocket.getInputStream(); //collecting what the arduino sent back
+                    while(!bStop){ //using the stop clause to make sure we don't go out of bounds
                         byte[] buffer = new byte[256];
                         if(input.available() > 0){
                             input.read(buffer);
@@ -108,26 +97,23 @@ public class collect_Data extends Activity {
                             while(i < buffer.length && buffer[i] != 0){
                                 i++;
                             }
-                          final String strinput = new String(buffer,0,i);
-                            System.out.println(strinput);
-                            bStop = true;
-                            changeText(strinput);
-
+                          final String strinput = new String(buffer,0,i); //this is the compiled output from the arduino
+                            // System.out.println(strinput);  **CONSOLE print to check if data is correct**
+                            bStop = true; //everything is done so change stop clause to true
+                            changeText(strinput); //call the function to change the text.
                         }
                     }
                 }
-                catch (IOException e){
+                catch (IOException e){ //catching exceptions
                     e.printStackTrace();
                 }
             }
-            catch (IOException e){
-                System.out.println("Error 324");
+            catch (IOException e){ //catching exceptions
             }
         }
     }
     public void changeText(String text){
         output.setText(text);
-    }
-
+    } //small method that changes the textview text to include the gathered values
 }
 

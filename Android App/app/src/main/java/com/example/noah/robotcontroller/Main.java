@@ -42,20 +42,20 @@ public class Main extends AppCompatActivity {
                 else{
                     //Put an error message if there is no bluetooth
                 }
-            final ArrayAdapter arraylister = new ArrayAdapter(Main.this,android.R.layout.simple_list_item_1, devicelist);
+            final ArrayAdapter arraylister = new ArrayAdapter(Main.this,android.R.layout.simple_list_item_1, devicelist); //sets up the listview to show all the paired bluetooth devices
             listdevice.setAdapter(arraylister);
-            listdevice.setOnItemClickListener(listlisten);
+            listdevice.setOnItemClickListener(listlisten); //this is a listener. when the user taps on a device on the list it moves forward
             }
         });
     }
     private AdapterView.OnItemClickListener listlisten = new AdapterView.OnItemClickListener(){
-        public void onItemClick(AdapterView av, View v, int arg2, long arg3){
+        public void onItemClick(AdapterView av, View v, int arg2, long arg3){ //on click listener which then starts an intent
             String info =((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
 
-            Intent i = new Intent(Main.this,collect_Data.class);
-            i.putExtra(dev_add, address);
-            startActivity(i);
+            Intent collo = new Intent(Main.this,collect_Data.class); //intent to go to the second screen
+            collo.putExtra(dev_add, address); //putting in the address
+            startActivity(collo); //launching collect_Data
         }
     };
 
